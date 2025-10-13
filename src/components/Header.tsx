@@ -1,6 +1,7 @@
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -12,10 +13,10 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="md:hidden">
               <Menu className="h-5 w-5" />
             </Button>
-            <a href="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <ShoppingCart className="h-6 w-6 text-primary" />
               <span className="text-xl font-bold">ShopHub</span>
-            </a>
+            </Link>
           </div>
 
           {/* Search Bar */}
@@ -40,15 +41,19 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="md:hidden">
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" className="hidden md:flex gap-2">
-              <User className="h-5 w-5" />
-              <span>Account</span>
+            <Button variant="ghost" className="hidden md:flex gap-2" asChild>
+              <Link to="/account">
+                <User className="h-5 w-5" />
+                <span>Account</span>
+              </Link>
             </Button>
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-semibold">
-                0
-              </span>
+            <Button variant="ghost" size="icon" className="relative" asChild>
+              <Link to="/cart">
+                <ShoppingCart className="h-5 w-5" />
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-semibold">
+                  0
+                </span>
+              </Link>
             </Button>
           </div>
         </div>

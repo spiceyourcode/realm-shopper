@@ -1,4 +1,5 @@
 import { ShoppingCart, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -7,10 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <ShoppingCart className="h-6 w-6" />
               <span className="text-xl font-bold">ShopHub</span>
-            </div>
+            </Link>
             <p className="text-sm text-secondary-foreground/80">
               Your trusted online shopping destination for electronics, gadgets, and lifestyle products.
             </p>
@@ -56,9 +57,9 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-sm text-secondary-foreground/80">
-              <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
+              <li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li>
               <li><a href="#" className="hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
+              <li><Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
               <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
             </ul>
           </div>
