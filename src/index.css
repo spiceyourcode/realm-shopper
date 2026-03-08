@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 20% 98%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -17,7 +13,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 32 95% 55%;
+    --primary: 262 83% 58%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 215 25% 27%;
@@ -26,51 +22,59 @@ All colors MUST be HSL.
     --muted: 210 40% 96%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 38 92% 50%;
+    --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
+
+    --success: 160 84% 39%;
+    --success-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 32 95% 55%;
+    --ring: 262 83% 58%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --gradient-hero: linear-gradient(135deg, hsl(32 95% 55% / 0.1), hsl(38 92% 50% / 0.1));
-    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-card-hover: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58%), hsl(280 70% 50%));
+    --gradient-cta: linear-gradient(135deg, hsl(25 95% 53%), hsl(32 95% 55%));
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.08), 0 1px 2px -1px hsl(0 0% 0% / 0.08);
+    --shadow-card-hover: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.1);
+    --shadow-elegant: 0 10px 30px -10px hsl(262 83% 58% / 0.3);
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 0 0% 98%;
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 215 25% 15%;
-    --card-foreground: 0 0% 98%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 215 25% 15%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 222 47% 9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 32 95% 55%;
+    --primary: 262 83% 65%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 215 25% 20%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 215 25% 20%;
+    --muted: 215 25% 15%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 38 92% 50%;
+    --accent: 25 95% 60%;
     --accent-foreground: 0 0% 100%;
+
+    --success: 160 84% 45%;
+    --success-foreground: 0 0% 100%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 215 25% 20%;
     --input: 215 25% 20%;
-    --ring: 32 95% 55%;
+    --ring: 262 83% 65%;
   }
 }
 
@@ -81,5 +85,12 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-xl bg-background/80 border border-border/50;
   }
 }
