@@ -1,33 +1,62 @@
-import { Smartphone, Laptop, Watch, Camera, Gamepad2, Headphones } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { categoriesAPI } from "@/api/services";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const categories = [
-  { name: "Electronics", icon: Smartphone },
-  { name: "Computers", icon: Laptop },
-  { name: "Wearables", icon: Watch },
-  { name: "Cameras", icon: Camera },
-  { name: "Gaming", icon: Gamepad2 },
-  { name: "Audio", icon: Headphones },
-];
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 const Categories = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+  const activeSlug = searchParams.get("category__slug");
+
+  useEffect(() => {
+    categoriesAPI.list().then(({ data }) => {
+      setCategories(Array.isArray(data) ? data : data.results || []);
+    }).catch(() => {}).finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="border-b bg-card">
+        <div className="container mx-auto px-4 py-3 flex gap-3 overflow-x-auto">
+          {Array.from({ length: 6 }, (_, i) => <Skeleton key={i} className="h-8 w-24 rounded-full shrink-0" />)}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <section className="border-b bg-muted/30">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center gap-3 overflow-x-auto">
-          {categories.map((category) => (
-            <Button
-              key={category.name}
-              variant="ghost"
-              className="flex items-center gap-2 whitespace-nowrap hover:bg-primary/10 hover:text-primary transition-colors"
+    <div className="border-b bg-card">
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+          <Link
+            to="/"
+            className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+              !activeSlug ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80 text-foreground"
+            }`}
+          >
+            All
+          </Link>
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              to={`/?category__slug=${cat.slug}`}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                activeSlug === cat.slug ? "bg-primary text-primary-foreground" : "bg-muted hover:bg-muted/80 text-foreground"
+              }`}
             >
-              <category.icon className="h-4 w-4" />
-              <span className="text-sm font-medium">{category.name}</span>
-            </Button>
+              {cat.name}
+            </Link>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
